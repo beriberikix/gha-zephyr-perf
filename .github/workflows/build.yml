@@ -1,0 +1,50 @@
+name: build for speeeed
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    # Used fix version for consistency
+    runs-on: ubuntu-22.04
+
+    strategy:
+      matrix:
+        ZEPHYR_SDK_VERSION: [0.16.1]
+        BOARD: ["stm32_min_dev_blue"]
+
+    steps:
+      - name: Install OS dependencies
+        run: >
+          sudo apt-get install -y
+          cmake
+          device-tree-compiler
+          git
+          ninja-build
+          python3
+          python3-pip
+          wget
+          xz-utils
+
+      - name: Install build tools
+        run: |
+          pip3 install wheel
+          pip3 install west
+
+      - name: Install Zephyr SDK
+        run: |
+          wget -q "https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v${{ matrix.ZEPHYR_SDK_VERSION }}/zephyr-sdk-${{ matrix.ZEPHYR_SDK_VERSION }}_linux-x86_64_minimal.tar.xz"
+          mkdir -p /opt/zephyr-sdk
+          tar -xvf zephyr-sdk-${{ matrix.ZEPHYR_SDK_VERSION }}_linux-x86_64_minimal.tar.xz -C /opt/zephyr-sdk --strip-components=1
+          /opt/zephyr-sdk/setup.sh -t arm-zephyr-eabi
+          rm zephyr-sdk-${{ matrix.ZEPHYR_SDK_VERSION }}_linux-x86_64_minimal.tar.xz
+
+      - name: Build with West
+        run: |
+          west init ~/zephyrproject
+          cd ~/zephyrproject
+          west update
+          west zephyr-export
+          pip install -r ~/zephyrproject/zephyr/scripts/requirements.txt
+          cd ~/zephyrproject/zephyr
+          west build -p always -b ${{ matrix.BOARD }} samples/basic/blinky
