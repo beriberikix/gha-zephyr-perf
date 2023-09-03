@@ -50,6 +50,7 @@ jobs:
 
       - name: Build with West
         run: |
+          cd ./zephyrproject
           west update
           west zephyr-export
           pip install -r ./zephyrproject/zephyr/scripts/requirements.txt
