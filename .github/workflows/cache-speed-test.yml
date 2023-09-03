@@ -35,7 +35,7 @@ jobs:
 
       - name: Init with West
         run: |
-          west init
+          west init ~/zephyrproject
 
       - name: Cache West modules
         id: cache-west-modules
