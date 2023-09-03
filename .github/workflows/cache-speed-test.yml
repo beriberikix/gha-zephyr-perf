@@ -46,7 +46,7 @@ jobs:
           path: |
             modules/
             zephyr/
-          key: zephyr-modules-${{ env.cache-name }}-${{ hashFiles('~/zephyrproject/zephyr/west.yml') }}
+          key: zephyr-modules-${{ env.cache-name }}-${{ hashFiles('zephyrproject/zephyr/west.yml') }}
 
       - name: Build with West
         run: |
