@@ -46,6 +46,7 @@ jobs:
           # cat ~/zephyrproject/zephyr/west.yml
           echo "Githb workspace"
           echo "$GITHUB_WORKSPACE"
+          ls $GITHUB_WORKSPACE
 
       - name: Cache West modules
         id: cache-west-modules
