@@ -97,10 +97,10 @@ jobs:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('./zephyrproject/zephyr/scripts/requirements.txt') }}
 
-      # - name: Build with West
-      #   run: |
-      #     cd ./zephyrproject
-      #     west update
-      #     west zephyr-export
-      #     cd ./zephyr
-      #     west build -p always -b stm32_min_dev_blue samples/basic/blinky
+      - name: Build with West
+        run: |
+          cd ./zephyrproject
+          west update
+          west zephyr-export
+          cd ./zephyr
+          west build -p always -b stm32_min_dev_blue samples/basic/blinky
