@@ -36,6 +36,7 @@ jobs:
       - name: Init with West
         run: |
           west init ~/zephyrproject
+          cd ~/zephyrproject
           echo "PWD"
           pwd
           echo "LS"
