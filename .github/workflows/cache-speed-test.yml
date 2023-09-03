@@ -35,9 +35,7 @@ jobs:
 
       - name: Init with West
         run: |
-          echo $PWD
-          west init ~/zephyrproject
-          cd ~/zephyrproject
+          west init ./zephyrproject
 
       - name: Cache West modules
         id: cache-west-modules
@@ -46,9 +44,9 @@ jobs:
           cache-name: v1
         with:
           path: |
-            ~/zephyrproject/modules/
-            ~/zephyrproject/zephyr/
-          key: zephyr-modules-${{ env.cache-name }}-${{ hashFiles('~/zephyrproject/zephyr/west.yml') }}
+            ./zephyrproject/modules/
+            ./zephyrproject/zephyr/
+          key: zephyr-modules-${{ env.cache-name }}-${{ hashFiles('./zephyrproject/zephyr/west.yml') }}
 
       - name: Build with West
         run: |
