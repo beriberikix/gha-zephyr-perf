@@ -36,17 +36,7 @@ jobs:
       - name: Init with West
         run: |
           west init ~/zephyrproject
-          # echo "PWD"
-          # pwd
-          # echo "LS"
-          # ls
-          # echo "LS zephyr"
-          # ls ~/zephyrproject/zephyr
-          # echo "CAT"
-          # cat ~/zephyrproject/zephyr/west.yml
-          echo "Githb workspace"
-          echo "$GITHUB_WORKSPACE"
-          ls $GITHUB_WORKSPACE
+          cd ~/zephyrproject
 
       - name: Cache West modules
         id: cache-west-modules
@@ -57,7 +47,7 @@ jobs:
           path: |
             modules/
             zephyr/
-          key: zephyr-modules-${{ env.cache-name }}-${{ hashFiles('**/zephyrproject/zephyr/west.yml') }}
+          key: zephyr-modules-${{ env.cache-name }}-${{ hashFiles('zephyr/west.yml') }}
 
       # - name: Build with West
       #   run: |
