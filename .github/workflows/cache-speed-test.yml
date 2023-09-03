@@ -53,6 +53,6 @@ jobs:
           cd ./zephyrproject
           west update
           west zephyr-export
-          pip install -r ./zephyrproject/zephyr/scripts/requirements.txt
-          cd ./zephyrproject/zephyr
+          pip install -r ./zephyr/scripts/requirements.txt
+          cd ./zephyr
           west build -p always -b stm32_min_dev_blue samples/basic/blinky
