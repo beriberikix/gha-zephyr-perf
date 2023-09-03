@@ -1,4 +1,4 @@
-name: build for speeeed
+name: Single run
 
 on:
   workflow_dispatch:
