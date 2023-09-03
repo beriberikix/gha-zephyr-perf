@@ -36,14 +36,16 @@ jobs:
       - name: Init with West
         run: |
           west init ~/zephyrproject
-          echo "PWD"
-          pwd
-          echo "LS"
-          ls
-          echo "LS zephyr"
-          ls ~/zephyrproject/zephyr
-          echo "CAT"
-          cat ~/zephyrproject/zephyr/west.yml
+          # echo "PWD"
+          # pwd
+          # echo "LS"
+          # ls
+          # echo "LS zephyr"
+          # ls ~/zephyrproject/zephyr
+          # echo "CAT"
+          # cat ~/zephyrproject/zephyr/west.yml
+          echo "Githb workspace"
+          echo "$GITHUB_WORKSPACE"
 
       - name: Cache West modules
         id: cache-west-modules
