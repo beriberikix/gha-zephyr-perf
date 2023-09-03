@@ -160,22 +160,8 @@ jobs:
           cd ~/zephyrproject/zephyr
           west build -p always -b stm32_min_dev_blue samples/basic/blinky
 
-  combined:
+  narrow-depth1:
     runs-on: ubuntu-22.04
-
-    strategy:
-      matrix:
-        PARAM1: ["--narrow","-o=--depth=1"]
-        PARAM2: ["--narrow","-o=--depth=1"]
-        # PARAM3: []
-        exclude:
-          - PARAM1: "--narrow"
-            PARAM2: "--narrow"
-          - PARAM1: "-o=--depth=1"
-            PARAM2: "--narrow"
-          - PARAM1: "-o=--depth=1"
-            PARAM2: "-o=--depth=1"
-
 
     steps:
       - name: Install OS dependencies
@@ -207,7 +193,7 @@ jobs:
         run: |
           west init ~/zephyrproject
           cd ~/zephyrproject
-          west update ${{ matrix.PARAM1 }} ${{ matrix.PARAM2 }}
+          west update --narrow -o=--depth=1
           west zephyr-export
           pip install -r ~/zephyrproject/zephyr/scripts/requirements.txt
           cd ~/zephyrproject/zephyr
