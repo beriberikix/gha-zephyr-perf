@@ -41,6 +41,8 @@ jobs:
           pwd
           echo "LS"
           ls
+          echo "LS zephyr"
+          ls zephyr
 
       - name: Cache West modules
         id: cache-west-modules
