@@ -40,7 +40,7 @@ jobs:
         id: cache-west-modules
         uses: actions/cache@v3
         env:
-          cache-name: w2
+          cache-name: w1
         with:
           path: |
             ./zephyrproject/modules/
@@ -51,7 +51,7 @@ jobs:
         id: cache-pip-packages
         uses: actions/cache@v3
         env:
-          cache-name: p2
+          cache-name: p1
         with:
           path: ~/.cache/pip
           key: zephyr-pip-${{ env.cache-name }}-${{ hashFiles('./zephyrproject/zephyr/scripts/requirements.txt') }}
