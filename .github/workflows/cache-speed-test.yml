@@ -171,6 +171,9 @@ jobs:
   warm-cache:
     runs-on: ubuntu-22.04
 
+    concurrency:
+      group: warming
+
     steps:
       - name: Install OS dependencies
         run: >
@@ -234,6 +237,9 @@ jobs:
 
   all-in-one:
     runs-on: ubuntu-22.04
+
+    concurrency:
+      group: build
 
     strategy:
       matrix:
