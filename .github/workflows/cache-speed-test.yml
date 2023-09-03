@@ -48,11 +48,17 @@ jobs:
             ./zephyrproject/zephyr/
           key: zephyr-modules-${{ env.cache-name }}-${{ hashFiles('./zephyrproject/zephyr/west.yml') }}
 
-      - name: Build with West
+      - name: West update
         run: |
           cd ./zephyrproject
           west update
           west zephyr-export
+
+      - name: Python packages
+        run: |
           pip install -r ./zephyr/scripts/requirements.txt
+
+      - name: Build with west
+        run: |
           cd ./zephyr
           west build -p always -b stm32_min_dev_blue samples/basic/blinky
