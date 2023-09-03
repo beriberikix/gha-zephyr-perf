@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  west_yml:
+  cache-westyml:
     runs-on: ubuntu-22.04
 
     steps:
@@ -50,11 +50,10 @@ jobs:
             ~/zephyrproject/zephyr/
           key: zephyr-modules-${{ env.cache-name }}-${{ hashFiles('~/zephyrproject/zephyr/west.yml') }}
 
-      # - name: Build with West
-      #   run: |
-      #     cd ~/zephyrproject
-      #     west update
-      #     west zephyr-export
-      #     pip install -r ~/zephyrproject/zephyr/scripts/requirements.txt
-      #     cd ~/zephyrproject/zephyr
-      #     west build -p always -b stm32_min_dev_blue samples/basic/blinky
+      - name: Build with West
+        run: |
+          west update
+          west zephyr-export
+          pip install -r ~/zephyrproject/zephyr/scripts/requirements.txt
+          cd ~/zephyrproject/zephyr
+          west build -p always -b stm32_min_dev_blue samples/basic/blinky
